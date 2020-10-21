@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Congrats = ({success}) => (
-    <div data-test="component-congrats">
+    <div data-test="component-congrats" className="alert alert-success">
         <span data-test="component-message"> 
             {success && `Congratulations! You guessed the correct word` }
         </span>    

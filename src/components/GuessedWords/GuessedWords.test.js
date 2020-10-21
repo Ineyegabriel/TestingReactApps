@@ -1,0 +1,65 @@
+import React from "react";
+import { shallow } from "enzyme";
+import { findByAtrr, checkProp } from "../../test/test.utils";
+import GuessedWords from "./GuessedWords";
+
+const defaultProps = {
+    guessedWords: [{ guessedWord: "train", letterMatchCount: 3 }],
+  };
+/**
+ * Factory function to create shallow wrapper for the Guessed Words component.
+ * @function setup 
+ * @params {object} props - Component props specific to this component
+ * @return ShallowWrapper 
+ */
+const setup = (props ={}) => {
+    const setupProps = {...defaultProps, ...props};
+    return shallow(<GuessedWords {...setupProps}/>);
+};
+
+test('does not throw warning with expected props', ()=>{
+    checkProp(GuessedWords, defaultProps)
+});
+
+describe('if there are no words guessed', ()=> {
+    let wrapper;
+    beforeEach(() => {
+        wrapper = setup({guessedWords: []});
+    })
+    test('renders with out error', () => {
+        const component = findByAtrr(wrapper, 'component-guessed-words');
+        expect(component.length).toBe(1)
+    });
+
+    test('renders instruction to guess a word', () => {
+        const instructions = findByAtrr(wrapper, 'component-guess-instruction');
+        expect(instructions.text().length).not.toBe(0)
+    });
+});
+
+
+describe('if there are words guessed', ()=> {
+    let wrapper;
+    const guessedWords = [
+        {guessedWord: 'train', letterMatchCount: 3},
+        {guessedWord: 'agile', letterMatchCount: 1},
+        {guessedWord: 'party', letterMatchCount: 5},
+    ];
+    beforeEach(() => {
+        wrapper = setup({guessedWords})
+    })
+    test('renders without error', () => {
+        const component = findByAtrr(wrapper, 'component-guessed-words');
+        expect(component.length).toBe(1)
+    });
+
+    test('renders guessed words section', () => {
+        const guessedWordsNode = findByAtrr(wrapper, 'guessed-words');
+        expect(guessedWordsNode.length).toBe(1);
+    });
+
+    test('correct number of guessed words', () => {
+        const guessedWordsNode = findByAtrr(wrapper, 'guessed-word');
+        expect(guessedWordsNode.length).toBe(guessedWords.length)
+    });
+});
