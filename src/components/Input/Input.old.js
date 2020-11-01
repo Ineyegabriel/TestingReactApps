@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 
 class Input extends React.Component {
   render() {
-
-    const contents = this.props.success ? null : (
-      <form className="form-inline">
+    const contents = this.props.success ? null :
+     (<form className="form-inline">
         <input
           data-test="input-box"
           className="mb2 mx-sm-3"
@@ -21,12 +20,14 @@ class Input extends React.Component {
           Submit
         </button>
       </form>
-    );
+      )
+
     return <div data-test="component-input">{contents}</div>;
   }
 }
-const mapStateToProps = ({ success }) => ({
-  success,
-});
+
+const mapStateToProps = ({success}) => {
+  return {success};
+};
 
 export default connect(mapStateToProps)(Input);

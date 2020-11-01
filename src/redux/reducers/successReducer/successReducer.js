@@ -1,3 +1,4 @@
+import { actionTypes } from "../../actions";
 /**
  * @function successReducer
  * @param {array} state 
@@ -5,16 +6,13 @@
  * @return {boolean}
  */
 
-const { actionTypes } = require("../../actions");
 
-const successReducer = (state=false, action) => {
+const successReducer = (state = false, action) => {
     switch(action.type){
-        case actionTypes.CORRECT_GUESS:
+        case (actionTypes.CORRECT_GUESS):
             return true;
-
         default: 
         return state;
-
     }
 }
 

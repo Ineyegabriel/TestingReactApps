@@ -1,12 +1,14 @@
 import {actionTypes} from '../';
 
 /**
- * Action creators for correct guess
- * @function correctGuess
- * @param {string} action 
- * @param {object} payload 
- * @returns {object}
+ * Redux thunk function that dispatches guessword action  
+ * and conditionally correct guess action 
+ * @function guessedWord
+ * @param {string} guessedWord 
+ * @returns {function}  
  */
-export const correctGuess = () => ({
-    type: actionTypes.CORRECT_GUESS
-});
+export const guessedWord = (guessedWord) => {
+    return (dispatch, getState) => {
+
+    }
+}
