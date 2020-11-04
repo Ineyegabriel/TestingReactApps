@@ -14,7 +14,7 @@ describe('render', () => {
     describe('Word is has not being guessed', () => {
         let wrapper;
         beforeEach(() => {
-            const initialState = { success: true };
+            const initialState = { success: false };
             wrapper = setup(initialState);
         })
         test('renders component without error', () => {
@@ -31,26 +31,26 @@ describe('render', () => {
         });
     });
 
-    // describe('Word is has being guessed', () => {
-    //     let wrapper;
-    //     beforeEach(() => {
-    //         const initialState = { success: true };
-    //         wrapper = setup(initialState);
-    //     })
-    //     test('renders component without error', () => {
-    //         const component = findByAtrr(wrapper, 'component-input');
-    //         expect(component.length).toBe(1);
-    //     });
-    //     test('does not render input box', () => {
-    //         const inputBox = findByAtrr(wrapper, 'input-box');
-    //         expect(inputBox.length).toBe(0);
-    //     });
+    describe('Word is has being guessed', () => {
+        let wrapper;
+        beforeEach(() => {
+            const initialState = { success: true };
+            wrapper = setup(initialState);
+        })
+        test('renders component without error', () => {
+            const component = findByAtrr(wrapper, 'component-input');
+            expect(component.length).toBe(1);
+        });
+        test('does not render input box', () => {
+            const inputBox = findByAtrr(wrapper, 'input-box');
+            expect(inputBox.length).toBe(0);
+        });
 
-    //     test('does not render submit button', () => {
-    //         const submitButton = findByAtrr(wrapper, 'submit-button');
-    //         expect(submitButton.length).toBe(0);
-    //     });
-    // })
+        test('does not render submit button', () => {
+            const submitButton = findByAtrr(wrapper, 'submit-button');
+            expect(submitButton.length).toBe(0);
+        });
+    })
 
 });
 
