@@ -1,6 +1,6 @@
 import {actionTypes} from '../';
 import { getLetterMatchCount } from '../../../helpers';
-
+import axios from 'axios';
 /**
  * Redux thunk function that dispatches guessword action  
  * and conditionally correct guess action 
@@ -21,3 +21,15 @@ export const guessWord = (guessedWord) => {
         } 
     }
 };
+
+export const getSecretWord = () => (
+    dispatch => {
+        return axios.get('http://localhost:3030/')
+        .then(response => {
+            dispatch({
+                type: actionTypes.SET_SECRET_WORD,
+                payload: response.data
+            })
+        });
+    }
+)

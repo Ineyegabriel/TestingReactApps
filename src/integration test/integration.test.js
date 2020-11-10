@@ -1,6 +1,11 @@
 import { storeFactory } from "../test/test.utils";
 import { guessWord } from "../redux/actions/actionCreators/actionCreators";
+import { createPortal } from "react-dom";
 
+// 3 steps in testing a thunk 
+// 1. Create a store with an initialState
+// 2. Dispatch an action creator 
+// 3. Check if state is updated correctly
 
 describe("guessWord action dispatcher", () => {
   let secretWord = "party";
