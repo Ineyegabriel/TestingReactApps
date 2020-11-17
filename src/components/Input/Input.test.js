@@ -71,16 +71,31 @@ describe('redux props', () => {
 });
 
 describe('`guessWord` action creator called', () => {
-    test('check that input dispatches `guessWord` action on button click', () => {
-        const guessWordMock = jest.fn(); 
+    let guessWordMock;
+    let wrapper;
+    const guessedWord = 'train';
+
+    beforeEach(() => {
+        guessWordMock = jest.fn(); 
         const props ={
             guessWord: guessWordMock
         }
-        const wrapper = shallow(<UnconnectedInput {...props}/>)
-        const submitButton = findByAtrr(wrapper, 'submit-button');
-        submitButton.simulate('click');
+        wrapper = shallow(<UnconnectedInput {...props}/>);
 
+        //add value to the input box
+        wrapper.setState({currentGuess: guessedWord})
+        const submitButton = findByAtrr(wrapper, 'submit-button');
+        submitButton.simulate('click',{preventDefault(){}});
+    })
+    test('check that  `guessWord` was called once', () => {
         const guessWordCallMock = guessWordMock.mock.calls.length;
         expect(guessWordCallMock).toBe(1);
+    });
+    test('calls `guessWord with input value as argument`', () => {
+        const guessedWordArg = guessWordMock.mock.calls[0][0];
+        expect(guessedWordArg).toBe(guessedWord);
+    });
+    test('checking that input box is cleared on submit', () => {
+        expect(wrapper.state('currentGuess')).toBe('');
     })
 })
