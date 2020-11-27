@@ -1,6 +1,5 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import Congrats from './Congrats';
 import { findByAtrr, checkProp } from '../../test/test.utils';
 
